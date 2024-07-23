@@ -1,0 +1,29 @@
+POST http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "tel": 654098432,
+    "username": "Alberto"
+}
+
+###
+
+GET http://localhost:3000/api/users/
+
+###
+
+GET http://localhost:3000/api/users/1
+
+###
+
+PUT http://localhost:3000/api/users/4 HTTP/1.1
+content-type: application/json
+
+{
+    "tel": 643265465,
+    "username": "Fran"
+}
+
+###
+
+DELETE http://localhost:3000/api/users/4

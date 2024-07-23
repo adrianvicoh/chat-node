@@ -1,6 +1,6 @@
 //importamos express y controladores
 import express from "express";
-import chatRouter from './rutas/chatRouter.js';
+import userRouter from './rutas/userRouter.js';
 
 //instanciamos nueva aplicación express
 const app = express();
@@ -8,8 +8,8 @@ const app = express();
 //necesario para poder recibir datos en json
 app.use(express.json());
 
-//las rutas que empiecen por /api/alumnes se dirigirán a alumnesRouter
-app.use('/api/chat', chatRouter);
+// Rutas
+app.use('/api/users', userRouter);
 
 // servimos front como ruta estática
 app.use(express.static('front-chat/dist'));

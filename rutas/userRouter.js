@@ -4,27 +4,28 @@ import { DataTypes } from "sequelize";
 import sequelize from "../loadSequelize.js";
 
 //DEFINICION DEL MODELO
-const Alumne = sequelize.define('Alumne', {
-    nom: DataTypes.STRING
-}, { tableName: 'alumnes', timestamps: false });
+const User = sequelize.define('User', {
+    tel: DataTypes.INTEGER,
+    username: DataTypes.STRING
+}, { tableName: 'users', timestamps: false });
 
 
 
 const router = express.Router();
 
-// GET lista de todos los alumnes
-// vinculamos la ruta /api/alumnes a la función declarada
+// GET lista de todos los users
+// vinculamos la ruta /api/users a la función declarada
 // si todo ok devolveremos un objeto tipo:
-//     {ok: true, data: [lista_de_objetos_alumne...]}
+//     {ok: true, data: [lista_de_objetos_user...]}
 // si se produce un error:
 //     {ok: false, error: mensaje_de_error}
 
 router.get('/', function (req, res, next) {
 
-    Alumne.findAll()
-        .then(alumnes => res.json({
+    User.findAll()
+        .then(users => res.json({
             ok: true,
-            data: alumnes
+            data: users
         }))
         .catch(error => res.json({
             ok: false,
@@ -33,13 +34,13 @@ router.get('/', function (req, res, next) {
 
 });
 
-// GET de un solo alumne
+// GET de un solo user
 router.get('/:id', function (req, res, next) {
-    Alumne.findOne({ where: { id: req.params.id } })
-        // .then(Alumne => Alumne.get({plain: true}))
-        .then(Alumne => res.json({
+    User.findOne({ where: { tel: req.params.id } })
+        // .then(User => User.get({plain: true}))
+        .then(User => res.json({
             ok: true,
-            data: Alumne
+            data: User
         }))
         .catch(error => res.json({
             ok: false,
@@ -50,20 +51,20 @@ router.get('/:id', function (req, res, next) {
 
 
 
-// POST, creació d'un nou alumne
+// POST, creació d'un nou user
 router.post('/', function (req, res, next) {
 
-    Alumne.create(req.body)
+    User.create(req.body)
         .then((item) => item.save())
         .then((item) => res.json({ ok: true, data: item }))
         .catch((error) => res.json({ ok: false, error }))
 });
 
 
-// put modificació d'un alumne
+// put modificació d'un user
 router.put('/:id', function (req, res, next) {
 
-    Alumne.findOne({ where: { id: req.params.id } })
+    User.findOne({ where: { id: req.params.id } })
         .then((al) =>
             al.update(req.body)
         )
@@ -80,10 +81,10 @@ router.put('/:id', function (req, res, next) {
 
 
 
-// DELETE elimina l'alumne id
+// DELETE elimina l'user id
 router.delete('/:id', function (req, res, next) {
 
-    Alumne.destroy({ where: { id: req.params.id } })
+    User.destroy({ where: { id: req.params.id } })
         .then((data) => res.json({ ok: true, data }))
         .catch((error) => res.json({ ok: false, error }))
 
